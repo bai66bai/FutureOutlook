@@ -324,6 +324,7 @@ GameObject:
   m_Component:
   - component: {fileID: 258282988}
   - component: {fileID: 258282989}
+  - component: {fileID: 258282990}
   m_Layer: 5
   m_Name: VideoPanel
   m_TagString: Untagged
@@ -380,6 +381,19 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &258282990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 258282987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 365c446d87273564d948ec6ee606d89e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  videoPlayer: {fileID: 244940540}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1244,6 +1258,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fd70ff69399b6445b6207406cc49a0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RectTransform: {fileID: 0}
+  Texts: []
+  Turnthepage: {fileID: 0}
+  CtrImgMove: {fileID: 0}
 --- !u!114 &2271677031078827467
 MonoBehaviour:
   m_ObjectHideFlags: 0

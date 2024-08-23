@@ -9,6 +9,7 @@ public class CtrImgMove : MonoBehaviour
     public float duration = 0.5f;
     public int MovingDistance = 1882;
     public Turnthepage turnthepage;
+    public LoadScene loadScene;
 
 
     private bool isFinish = true;
@@ -20,7 +21,7 @@ public class CtrImgMove : MonoBehaviour
     {
         float width = swipeArea.rect.width;
         bigIndex = (int)width / MovingDistance;
-        Debug.Log(bigIndex);
+        Debug.Log(nowIndex);
     }
 
 
@@ -35,6 +36,10 @@ public class CtrImgMove : MonoBehaviour
             StartCoroutine(MoveAndScaleOverTime(targetLocalPosition, duration));
             --nowIndex;
             turnthepage.ChangeBtnColor(nowIndex);
+            if (nowIndex != 3)
+            {
+                loadScene.ChangeTextColor(nowIndex);
+            }
             isFinish = false;
         }
     }
@@ -49,6 +54,11 @@ public class CtrImgMove : MonoBehaviour
             StartCoroutine(MoveAndScaleOverTime(targetLocalPosition, duration));
             ++nowIndex;
             turnthepage.ChangeBtnColor(nowIndex);
+            if(nowIndex != 3)
+            {
+                loadScene.ChangeTextColor(nowIndex);
+            }
+            
             isFinish = false;
         }
     }
