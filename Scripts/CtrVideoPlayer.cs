@@ -1,4 +1,5 @@
 
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Video;
@@ -15,6 +16,29 @@ public class CtrVideoPlayer : MonoBehaviour, IPointerClickHandler
 
 
     private bool isShow = false;
+
+
+    private Coroutine debounceCoroutine = null;
+    private float debounceTime = 0.3f; // 防抖时间间隔
+
+
+    // 用来触发的方法
+    public void TriggerMethod()
+    {
+        if (debounceCoroutine != null)
+        {
+            StopCoroutine(debounceCoroutine);
+        }
+        debounceCoroutine = StartCoroutine(DebounceCoroutine());
+    }
+
+    // 防抖协程
+    private IEnumerator DebounceCoroutine()
+    {
+        yield return new WaitForSeconds(debounceTime);
+        TogglePlayPause();
+        debounceCoroutine = null; // 重置协程
+    }
     void Start()
     {
         if (videoPlayer == null)
@@ -31,7 +55,6 @@ public class CtrVideoPlayer : MonoBehaviour, IPointerClickHandler
         // 确保视频一开始是暂停的
         videoPlayer.Pause();
         isPlaying = false;
-
     }
 
     private void Update()
@@ -42,6 +65,10 @@ public class CtrVideoPlayer : MonoBehaviour, IPointerClickHandler
             isShow = false;
         }
     }
+
+
+
+
     /// <summary>
     /// 控制视频暂停播放
     /// </summary>
@@ -56,7 +83,6 @@ public class CtrVideoPlayer : MonoBehaviour, IPointerClickHandler
             videoPlayer.Play();
         }
         isPlaying = !isPlaying;
-
         PauseBtn(!isPlaying);
     }
 
@@ -85,7 +111,7 @@ public class CtrVideoPlayer : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        TogglePlayPause();
+        TriggerMethod();
         isShow = true;
     }
 }

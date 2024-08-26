@@ -9,17 +9,20 @@ public class FadeIn : MonoBehaviour
 {
     public Image image; // 需要调整透明度的图片
     public List<TextMeshProUGUI> texts;
-    public float duration = 0.5f; // 渐变时间
+    public float duration = 2f; // 渐变时间
     public Image CloseImg;
     public Image OpenImg;
 
     private bool IsShow = false;
+
+    private bool IsFinsh = true;    
     public void TogglePopoActive()
     {
+        if (!IsFinsh) return;
+        IsFinsh = false;
         if (IsShow)
         {
-            EndColosePopo();
-            
+            EndColosePopo();  
         }
         else
         {
@@ -85,6 +88,7 @@ public class FadeIn : MonoBehaviour
         // 确保最终alpha为1（255）
         color.a = 1f;
         image.color = color;
+        IsFinsh = true;
     }
 
 
@@ -124,9 +128,9 @@ public class FadeIn : MonoBehaviour
             image.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
             yield return null;
         }
-
         // 确保最终透明度为0
         image.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0f);
+        IsFinsh = true;
     }
     IEnumerator FadeOutText(TextMeshProUGUI text, float duration)
     {
